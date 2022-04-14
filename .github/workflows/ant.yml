@@ -20,5 +20,11 @@ jobs:
       uses: battila7/jdk-via-jabba@v1
       with:
         jdk: zulu@1.8.152
-    - run: java -version
+    - run: echo deploying
+    - uses: trstringer/manual-approval@v1
+      with:
+        secret: ${{ github.TOKEN }}
+        approvers: shk2123
+    - name: Deploy to production
+      run: java -version
         
