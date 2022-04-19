@@ -5,15 +5,16 @@ name: Java CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ envDeploy ]
   pull_request:
-    branches: [ master ]
+    branches: [ envDeploy ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    environment:
+      name: prod
     steps:
     - uses: actions/checkout@v2
     - name: java
@@ -21,10 +22,6 @@ jobs:
       with:
         jdk: zulu@1.8.152
     - run: echo deploying
-    - uses: trstringer/manual-approval@v1
-      with:
-        secret: ${{ github.TOKEN }}
-        approvers: shk2123
     - name: Deploy to production
       run: java -version
         
